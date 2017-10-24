@@ -1,0 +1,30 @@
+---
+- name: Disable mirror list
+  lineinfile:
+    state: absent
+    dest: "/etc/yum.repos.d/{{ item }}"
+    regexp: '^mirrorlist\='
+  with_items:
+    - CentOS-Base.repo
+    - CentOS-CR.repo
+    - CentOS-Debuginfo.repo
+    - CentOS-fasttrack.repo
+    - CentOS-Media.repo
+    - CentOS-Sources.repo
+    - CentOS-Vault.repo
+  notify: clean yum metadata
+
+- name: Enable baseurl
+  replace:
+    dest: "/etc/yum.repos.d/{{ item }}"
+    regexp: '^#baseurl=http://mirror.centos.org/(.+)$'
+    replace: 'baseurl=http://mirror.centos.org/\1'
+  with_items:
+    - CentOS-Base.repo
+    - CentOS-CR.repo
+    - CentOS-Debuginfo.repo
+    - CentOS-fasttrack.repo
+    - CentOS-Media.repo
+    - CentOS-Sources.repo
+    - CentOS-Vault.repo
+  notify: clean yum metadata

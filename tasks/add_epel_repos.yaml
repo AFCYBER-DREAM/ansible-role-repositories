@@ -1,0 +1,23 @@
+---
+- name: Install epel-release package for EL7
+  yum:
+    name: epel-release
+    state: present
+
+- name: Disable epel mirror list
+  lineinfile:
+    state: absent
+    dest: "/etc/yum.repos.d/{{ item }}"
+    regexp: '^mirrorlist\='
+  with_items:
+    - epel.repo
+    - epel-testing.repo
+
+- name: Update epel to use the internal mirror
+  replace:
+    dest: "/etc/yum.repos.d/{{ item }}"
+    regexp: '^#baseurl=(.+)$'
+    replace: 'baseurl=\1'
+  with_items:
+    - epel.repo
+    - epel-testing.repo
