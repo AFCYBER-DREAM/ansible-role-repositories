@@ -1,5 +1,5 @@
-- include: update_centos_repos.yaml
+- include: update_centos_repos.yml
   when: ansible_distribution == "CentOS"
 
-- include: add_epel_repos.yaml
+- include: add_epel_repos.yml
   when: ansible_os_family == "RedHat"
