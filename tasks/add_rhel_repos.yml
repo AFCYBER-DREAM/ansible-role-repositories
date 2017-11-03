@@ -1,0 +1,54 @@
+- name: Add Red Hat server rpms
+  yum_repository:
+    name: rhel-server-rpms
+    description: Red Hat server rpms
+    file: rhel
+    baseurl: "http://{{ reposerver }}/repos/rhel-{{ ansible_distribution_major_version }}-server-rpms"
+    gpgcheck: no
+    enabled: "{{ rhel_server_rpms | default('yes') }}"
+  when: reposerver is defined
+  notify: clean yum metadata
+
+- name: Add Red Hat common rpms
+  yum_repository:
+    name: rhel-common-rpms
+    description: Red Hat common rpms
+    file: rhel
+    baseurl: "http://{{ reposerver }}/repos/rhel-{{ ansible_distribution_major_version }}-server-common-rpms"
+    gpgcheck: no
+    enabled: "{{ rhel_common_rpms | default('no') }}"
+  when: reposerver is defined
+  notify: clean yum metadata
+
+- name: Add Red Hat server optional rpms
+  yum_repository:
+    name: redhat-server-optional-rpms
+    description: Red Hat server optional rpms
+    file: rhel
+    baseurl: "http://{{ reposerver }}/repos/rhel-{{ ansible_distribution_major_version }}-server-optional-rpms"
+    gpgcheck: no
+    enabled: "{{ rhel_optional_rpms | default('no') }}"
+  when: reposerver is defined
+  notify: clean yum metadata
+
+- name: Add Red Hat server supplementary rpms
+  yum_repository:
+    name: rhel-server-supplementary-rpms
+    description: Red Hat server supplementary rpms
+    file: rhel
+    baseurl: "http://{{ reposerver }}/repos/rhel-{{ ansible_distribution_major_version }}-server-supplementary-rpms"
+    gpgcheck: no
+    enabled: "{{ rhel_supplementary_rpms | default('no') }}"
+  when: reposerver is defined
+  notify: clean yum metadata
+
+- name: Add Red Hat server extras rpms
+  yum_repository:
+    name: rhel-server-extras-rpms
+    description: Red Hat server extras rpms
+    file: rhel
+    baseurl: "http://{{ reposerver }}/repos/rhel-{{ ansible_distribution_major_version }}-server-extras-rpms"
+    gpgcheck: no
+    enabled: "{{ rhel_extra_rpms | default ('no') }}"
+  when: reposerver is defined
+  notify: clean yum metadata
