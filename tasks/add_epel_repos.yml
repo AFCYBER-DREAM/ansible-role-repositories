@@ -1,7 +1,7 @@
 ---
 - name: Install epel-release package for EL7
   yum:
-    name: epel-release
+    name: http://download.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     state: present
 
 - name: Disable epel mirror list
