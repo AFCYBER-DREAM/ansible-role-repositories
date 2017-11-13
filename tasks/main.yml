@@ -1,8 +1,8 @@
-- include: update_centos_repos.yml
+- import_tasks: update_centos_repos.yml
   when: ansible_distribution == "CentOS"
 
-- include: add_epel_repos.yml
+- import_tasks: add_epel_repos.yml
   when: ansible_os_family == "RedHat"
 
-- include: add_rhel_repos.yml
+- import_tasks: add_rhel_repos.yml
   when: ansible_distribution == "RedHat"
