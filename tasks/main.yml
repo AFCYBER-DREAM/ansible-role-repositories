@@ -2,7 +2,7 @@
   when: ansible_distribution == "CentOS"
 
 - import_tasks: add_epel_repos.yml
-  when: ansible_os_family == "RedHat"
+  when: epel and ansible_os_family == "RedHat"
 
 - import_tasks: add_rhel_repos.yml
   when: ansible_distribution == "RedHat"

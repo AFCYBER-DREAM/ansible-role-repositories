@@ -52,3 +52,15 @@
     enabled: "{{ rhel_extra_rpms | default ('no') }}"
   when: reposerver is defined
   notify: clean yum metadata
+
+- name: Add Red Hat server HA rpms
+  yum_repository:
+    name: rhel-server-ha-rpms
+    description: Red Hat server HA rpms
+    file: rhel
+    baseurl: "http://{{ reposerver }}/repos/rhel-ha-for-rhel-{{ ansible_distribution_major_version }}-server-rpms"
+    gpgcheck: no
+    enabled: "{{ rhel_server_ha_rpms | default ('no') }}"
+  when: reposerver is defined
+  notify: clean yum metadata
+
