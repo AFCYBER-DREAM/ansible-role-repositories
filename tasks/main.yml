@@ -6,3 +6,7 @@
 
 - import_tasks: add_rhel_repos.yml
   when: ansible_distribution == "RedHat"
+
+- import_tasks: add_ius_repos.yml
+  when: ansible_os_family == "RedHat"
+  
