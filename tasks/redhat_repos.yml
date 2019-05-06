@@ -1,3 +1,4 @@
+---
 - name: Add Red Hat server rpms
   yum_repository:
     name: rhel-server-rpms
@@ -63,4 +64,3 @@
     enabled: "{{ rhel_server_ha_rpms | default ('no') }}"
   when: reposerver is defined
   notify: clean yum metadata
-
