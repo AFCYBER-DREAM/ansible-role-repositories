@@ -10,6 +10,7 @@ platforms:
     image: centos:7
 provisioner:
   name: ansible
+  no_log: false
   lint:
     name: ansible-lint
     options:

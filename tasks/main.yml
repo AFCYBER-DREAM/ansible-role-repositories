@@ -6,8 +6,3 @@
   when:
     - repositories.redhat is defined
     - repositories.redhat.index > 0
-
-# - import_tasks: add_debian_role_repos.yml
-#   when:
-#     - repositories.debian is defined
-#     - repositories.debian.index > 0

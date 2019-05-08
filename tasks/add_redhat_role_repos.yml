@@ -7,11 +7,9 @@
   register: url_repos
   with_items:
     "{{ repositories.redhat }}"
-  when: item.url is defined and ansible_os_family == "RedHat"
-
-- debug: var=item.url
-  with_items:
-    "{{ repositories.redhat }}"
+  when:
+    - item.url is defined
+    - ansible_os_family == "RedHat"
 
 - name: Install Role Specific roles - variables
   yum_repository:
@@ -24,4 +22,6 @@
     state: "{{ item.state | default('present') }}"
   with_items:
     "{{ repositories.redhat }}"
-  when: item.name is defined and ansible_os_family == "RedHat"
+  when:
+    - item.name is defined
+    - ansible_os_family == "RedHat"
