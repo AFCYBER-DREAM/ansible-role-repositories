@@ -1,0 +1,28 @@
+---
+- name: Converge
+  hosts: all
+  no_log: false
+  vars:
+    - repositories:
+        redhat:
+          - { url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm" }
+          - { name: "ius",
+              description: "IUS Community Packages for Enterprise Linux 7",
+              baseurl: "https://dl.iuscommunity.org/pub/ius/stable/CentOS/7/$basearch",
+              enabled: 1,
+              gpgcheck: 0,
+              gpgkey: "file:///etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY" }
+  roles:
+    - role: ansible-role-repositories
+  post_tasks:
+    - name: Install a package from epel
+      yum:
+        name: fping
+        disablerepo: '*'
+        enablerepo: 'epel'
+        state: present
+
+    - name: Install a package from ius
+      yum:
+        name: tmux2u
+        state: present

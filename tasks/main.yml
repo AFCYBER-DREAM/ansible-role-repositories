@@ -1,12 +1,8 @@
-- import_tasks: update_centos_repos.yml
-  when: ansible_distribution == "CentOS"
+---
+- name: Import OS Specific
+  include_tasks: "{{ ansible_os_family | lower }}_repos.yml"
 
-- import_tasks: add_epel_repos.yml
-  when: epel and ansible_os_family == "RedHat"
-
-- import_tasks: add_rhel_repos.yml
-  when: ansible_distribution == "RedHat"
-
-- import_tasks: add_ius_repos.yml
-  when: ansible_os_family == "RedHat"
-  
+- import_tasks: add_redhat_role_repos.yml
+  when:
+    - repositories.redhat is defined
+    - repositories.redhat.index > 0

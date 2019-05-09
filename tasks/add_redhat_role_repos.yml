@@ -1,0 +1,27 @@
+---
+- name: Install Role Specific repos - packages
+  yum:
+    name:
+      "{{ item.url }}"
+    state: "{{ item.state | default('present') }}"
+  register: url_repos
+  with_items:
+    "{{ repositories.redhat }}"
+  when:
+    - item.url is defined
+    - ansible_os_family == "RedHat"
+
+- name: Install Role Specific roles - variables
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.baseurl }}"
+    enabled: "{{ item.enabled | default( 1 ) }}"
+    gpgcheck: "{{ item.gpgcheck | default( 0 ) }}"
+    gpgkey: "{{ item.gpgkey | default( omit ) }}"
+    state: "{{ item.state | default('present') }}"
+  with_items:
+    "{{ repositories.redhat }}"
+  when:
+    - item.name is defined
+    - ansible_os_family == "RedHat"

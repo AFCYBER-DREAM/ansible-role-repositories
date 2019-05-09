@@ -1,23 +1,15 @@
+---
 galaxy_info:
   author: Development Range Engineering, Architecture, and Modernization (DREAM) Team
   description: Role for adding / updating repositories.
   company: AFCYBER
   license: MIT
-  min_ansible_version: 2.0
+  min_ansible_version: 2.4
 
   platforms:
-  - name: EL
-    versions:
-    - all
-  - name: Fedora
-    versions:
-    - all
-  - name: Ubuntu
-    versions:
-    - all
-  - name: Debian
-    versions:
-    - all
+    - name: EL
+      versions:
+        - 7
 
   galaxy_tags: []
 
