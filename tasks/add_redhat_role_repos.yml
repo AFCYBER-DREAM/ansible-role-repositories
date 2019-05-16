@@ -4,6 +4,7 @@
     name:
       "{{ item.url }}"
     state: "{{ item.state | default('present') }}"
+    validate_certs: "{{ item.validate_certs | default( true ) }}"
   register: url_repos
   with_items:
     "{{ repositories.redhat }}"
